@@ -50,3 +50,12 @@ def addPhoto(request):
 
     context = {'categories':categories}
     return render(request, 'photos/add.html', context)
+
+
+def search_category(request):
+    categorys = request.GET.get('category')
+
+    print('categorys:', categorys)
+
+    photos = Photo.objects.filter(category__name=categorys)
+    return render(request, 'photos/search.html', {'photos': photos})
